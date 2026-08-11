@@ -532,3 +532,30 @@ footer{
     animation:none;
   }
 }
+
+/* Profile portrait + photo-matched cyberpunk colours */
+:root{--punk-cyan:#75e6e8;--punk-pink:#a45cff;--punk-yellow:#d9b45b;--accent:#75e6e8;--accent2:#a45cff}
+body{background:
+radial-gradient(circle at 82% 10%,rgba(164,92,255,.12),transparent 25%),
+radial-gradient(circle at 13% 28%,rgba(117,230,232,.09),transparent 25%),
+radial-gradient(circle at 70% 60%,rgba(111,52,64,.12),transparent 30%),
+linear-gradient(180deg,#090a0e 0%,#0d0b10 48%,#08090c 100%)}
+.profile-photo-wrap{position:relative;width:min(390px,90vw);margin-inline:auto;padding:13px;transform:rotate(1.2deg)}
+.profile-photo-frame{position:relative;overflow:hidden;aspect-ratio:4/5;
+clip-path:polygon(0 18px,18px 0,calc(100% - 34px) 0,100% 34px,100% 100%,0 100%);
+background:#0b0d12;border:1px solid rgba(117,230,232,.38);
+box-shadow:0 0 0 1px rgba(164,92,255,.12),0 0 34px rgba(164,92,255,.13),0 22px 70px rgba(0,0,0,.55)}
+.profile-photo-frame::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+background:linear-gradient(135deg,rgba(117,230,232,.10),transparent 28%),linear-gradient(315deg,rgba(164,92,255,.11),transparent 30%);mix-blend-mode:screen}
+.profile-photo-frame::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;z-index:2;pointer-events:none;background:linear-gradient(transparent,rgba(9,10,14,.34))}
+.profile-photo{width:100%;height:100%;object-fit:cover;object-position:center 28%;display:block;filter:saturate(.92) contrast(1.03);transition:.45s}
+.profile-photo-wrap:hover .profile-photo{transform:scale(1.025);filter:saturate(1) contrast(1.04)}
+.profile-photo-wrap::before,.profile-photo-wrap::after{content:"";position:absolute;z-index:4;width:74px;height:3px}
+.profile-photo-wrap::before{top:3px;left:-6px;background:linear-gradient(90deg,#75e6e8,#a45cff);box-shadow:0 0 14px rgba(117,230,232,.5)}
+.profile-photo-wrap::after{right:-5px;bottom:4px;background:linear-gradient(90deg,#6f3440,#d9b45b);box-shadow:0 0 14px rgba(217,180,91,.35)}
+.photo-tag{position:absolute;right:-8px;top:38px;z-index:5;padding:7px 10px;background:rgba(9,10,14,.88);
+border:1px solid rgba(217,180,91,.45);color:#e7c978;font:700 .68rem/1 monospace;letter-spacing:.08em}
+.btn.primary{background:linear-gradient(90deg,#75e6e8,#a45cff)}
+.punk-card{background:linear-gradient(135deg,rgba(20,19,25,.96),rgba(10,12,17,.96)),linear-gradient(90deg,rgba(111,52,64,.08),transparent)}
+.floating-badge{border-color:rgba(217,180,91,.28)}
+@media(max-width:800px){.profile-photo-wrap{width:min(330px,86vw);margin-top:20px}.photo-tag{right:0}}
