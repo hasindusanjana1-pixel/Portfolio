@@ -10,6 +10,11 @@
 <body>
   <div class="punk-grid" aria-hidden="true"></div>
   <div class="scanlines" aria-hidden="true"></div>
+  <div class="cinematic-lighting" aria-hidden="true">
+    <span class="beam beam-a"></span>
+    <span class="beam beam-b"></span>
+    <span class="beam beam-c"></span>
+  </div>
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
   <header>
     <nav class="nav container">
@@ -51,7 +56,7 @@
         </div></div>
     </section>
 
-    <section id="about" class="section container reveal">
+    <section id="about" data-scene="01" class="section container reveal">
       <p class="eyebrow">ABOUT ME</p><h2 class="section-title">Curious mind. Practical builder.</h2>
       <div class="glass punk-card about">
         <p>I’m Hasindu Sanjana, a BICT (Hons) undergraduate with a strong interest in software development, web technologies, and emerging technologies. I enjoy turning ideas into practical digital solutions and continuously improving my technical and problem-solving skills.</p>
@@ -59,7 +64,7 @@
       </div>
     </section>
 
-    <section id="skills" class="section container reveal">
+    <section id="skills" data-scene="02" class="section container reveal">
       <p class="eyebrow">SKILLS</p>
       <h2 class="section-title">What I work with</h2>
       <p class="skills-note">Current self-assessment — these percentages can be updated as my experience grows.</p>
@@ -134,7 +139,7 @@
       </div>
     </section>
 
-    <section id="projects" class="section container reveal">
+    <section id="projects" data-scene="03" class="section container reveal">
       <div class="project-heading">
         <div>
           <p class="eyebrow">FEATURED PROJECTS</p>
@@ -190,7 +195,7 @@
       </div>
     </section>
 
-    <section id="education" class="section container reveal">
+    <section id="education" data-scene="04" class="section container reveal">
       <p class="eyebrow">EDUCATION</p><h2 class="section-title">Academic journey</h2>
       <article class="glass punk-card education"><div class="dot"></div><div>
         <h3>University of Vavuniya</h3>
@@ -198,14 +203,60 @@
       </div></article>
     </section>
 
-    <section id="contact" class="section container reveal">
-      <div class="contact glass">
-        <p class="eyebrow">CONTACT</p><h2>Let’s build something great.</h2>
-        <p>Have a project, collaboration, or opportunity in mind? Feel free to get in touch.</p>
-        <div class="contact-links">
-          <a href="mailto:hasindusanjana1@gmail.com">hasindusanjana1@gmail.com</a>
-          <a href="tel:+94769617910">076 961 7910</a>
+    <section id="contact" data-scene="05" class="section container reveal">
+      <div class="contact-shell glass punk-card">
+
+        <div class="contact-neon-decor" aria-hidden="true">
+          <span class="neon-line neon-line-1"></span>
+          <span class="neon-line neon-line-2"></span>
+          <span class="neon-orb neon-orb-1"></span>
+          <span class="neon-orb neon-orb-2"></span>
         </div>
+
+        <div class="contact-copy">
+          <p class="eyebrow">CONTACT // OPEN CHANNEL</p>
+          <h2>Have an idea?<br><span>Let’s make it real.</span></h2>
+          <p class="contact-intro">I’m open to internship opportunities, collaborations and interesting technology projects. Send me a message or choose the easiest way to reach me.</p>
+          <div class="availability"><span></span> Available for opportunities</div>
+
+          <div class="contact-quick-grid">
+            <a class="contact-card" href="mailto:hasindusanjana1@gmail.com">
+              <span class="contact-icon">@</span>
+              <span><small>EMAIL ME</small><strong>hasindusanjana1@gmail.com</strong></span>
+              <b>↗</b>
+            </a>
+            <a class="contact-card" href="tel:+94769617910">
+              <span class="contact-icon">☎</span>
+              <span><small>CALL ME</small><strong>076 961 7910</strong></span>
+              <b>↗</b>
+            </a>
+          </div>
+
+          <div class="contact-social-grid">
+            <a href="https://www.linkedin.com/in/hasindu-sanjana-0719b5343" target="_blank" rel="noopener"><small>CONNECT</small><strong>LinkedIn</strong><b>↗</b></a>
+            <a href="https://github.com/hasindusanjana1-pixel" target="_blank" rel="noopener"><small>EXPLORE</small><strong>GitHub</strong><b>↗</b></a>
+          </div>
+        </div>
+
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="form-topline"><span>SEND A MESSAGE</span><small>MAIL // READY</small></div>
+          <label for="contact-name">Your name</label>
+          <input id="contact-name" name="name" type="text" placeholder="Enter your name" required>
+
+          <label for="contact-email">Your email</label>
+          <input id="contact-email" name="email" type="email" placeholder="you@example.com" required>
+
+          <label for="contact-subject">Subject</label>
+          <input id="contact-subject" name="subject" type="text" placeholder="Internship, project, collaboration..." required>
+
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" rows="6" placeholder="Write your message here..." required></textarea>
+
+          <button class="btn primary contact-submit" type="submit">Send Email <span>↗</span></button>
+          <p id="contact-status" class="contact-status" aria-live="polite">This opens your email app with the message filled in.</p>
+        </form>
+
+        <div class="contact-deco" aria-hidden="true"><span>LET'S TALK</span></div>
       </div>
     </section>
   </main>

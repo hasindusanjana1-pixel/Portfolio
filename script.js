@@ -191,3 +191,125 @@ if (logo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     setTimeout(() => logo.classList.remove('punk-flicker'), 120);
   }, 5200);
 }
+
+
+// Contact form: GitHub Pages is static, so compose the email using the visitor's mail app.
+const contactForm = document.getElementById('contact-form');
+const contactStatus = document.getElementById('contact-status');
+if (contactForm) {
+  contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = document.getElementById('contact-name').value.trim();
+    const email = document.getElementById('contact-email').value.trim();
+    const subject = document.getElementById('contact-subject').value.trim();
+    const message = document.getElementById('contact-message').value.trim();
+
+    if (!name || !email || !subject || !message) {
+      contactStatus.textContent = 'Please complete all fields before sending.';
+      contactStatus.className = 'contact-status error';
+      return;
+    }
+
+    const body = `Hi Hasindu,\n\n${message}\n\nFrom: ${name}\nEmail: ${email}`;
+    const mailto = `mailto:hasindusanjana1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    contactStatus.textContent = 'Opening your email app…';
+    contactStatus.className = 'contact-status success';
+    window.location.href = mailto;
+  });
+}
+
+
+// ======================================================
+// Cinematic scroll experience
+// ======================================================
+
+const cinematicSections = document.querySelectorAll('main > section');
+
+cinematicSections.forEach(section => {
+  if (section.id !== 'home') section.classList.add('cinematic-reveal');
+});
+
+const cinematicObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('cinematic-show');
+    }
+  });
+}, {
+  threshold: 0.18,
+  rootMargin: '0px 0px -8% 0px'
+});
+
+cinematicSections.forEach(section => {
+  if (section.id !== 'home') cinematicObserver.observe(section);
+});
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (!reduceMotion) {
+  const hero = document.querySelector('.hero');
+  const heroCopy = document.querySelector('.hero-copy');
+  const heroArt = document.querySelector('.hero-art');
+  const profilePhoto = document.querySelector('.profile-photo-wrap');
+  const beamA = document.querySelector('.beam-a');
+  const beamB = document.querySelector('.beam-b');
+  const beamC = document.querySelector('.beam-c');
+
+  let ticking = false;
+
+  function cinematicScroll() {
+    const y = window.scrollY;
+    const vh = window.innerHeight;
+    const heroProgress = Math.min(y / Math.max(vh, 1), 1);
+
+    if (heroCopy && y < vh * 1.2) {
+      heroCopy.style.transform = `translate3d(0, ${y * 0.16}px, 0)`;
+      heroCopy.style.opacity = String(1 - heroProgress * .72);
+    }
+
+    if (heroArt && y < vh * 1.2) {
+      heroArt.style.transform = `translate3d(0, ${y * -0.07}px, 0) scale(${1 + heroProgress * .035})`;
+      heroArt.style.opacity = String(1 - heroProgress * .38);
+    }
+
+    if (profilePhoto && y < vh * 1.2) {
+      profilePhoto.style.transform = `rotate(${1.2 + heroProgress * 1.1}deg) translate3d(0, ${heroProgress * -12}px, 0)`;
+    }
+
+    if (beamA) beamA.style.transform = `translate3d(0, ${y * .055}px, 0) rotate(18deg)`;
+    if (beamB) beamB.style.transform = `translate3d(0, ${y * -.035}px, 0) rotate(-16deg)`;
+    if (beamC) beamC.style.transform = `translate3d(${Math.sin(y / 600) * 24}px, ${y * -.02}px, 0) rotate(12deg)`;
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(cinematicScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  cinematicScroll();
+
+  // Tiny pointer depth effect for the hero image.
+  if (hero && heroArt && window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    hero.addEventListener('pointermove', e => {
+      if (window.scrollY > window.innerHeight * .85) return;
+
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - .5;
+      const y = (e.clientY - rect.top) / rect.height - .5;
+
+      heroArt.style.rotate = `${x * 2.2}deg`;
+      if (profilePhoto) {
+        profilePhoto.style.translate = `${x * 8}px ${y * 7}px`;
+      }
+    });
+
+    hero.addEventListener('pointerleave', () => {
+      heroArt.style.rotate = '';
+      if (profilePhoto) profilePhoto.style.translate = '';
+    });
+  }
+}
